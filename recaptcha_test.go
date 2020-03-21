@@ -10,8 +10,8 @@ import (
 
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
 const (
-	googleTestSecret = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
-	// googleTestSitekey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+	testSecret = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+	// testSitekey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 )
 
 func TestVerifyV2(t *testing.T) {
@@ -19,9 +19,13 @@ func TestVerifyV2(t *testing.T) {
 		description    string
 		clientResponse string
 		secret         string
-		// key            string
-		err error
+		err            error
 	}{
+		{
+			description:    "happy",
+			secret:         testSecret, // secret always leads to success in V2
+			clientResponse: "anything",
+		},
 		{
 			description: "missing form",
 			err:         ErrNoCaptcha,
@@ -30,11 +34,6 @@ func TestVerifyV2(t *testing.T) {
 			description:    "missing secret",
 			clientResponse: "anything",
 			err:            ErrNoSuccess,
-		},
-		{
-			description:    "happy",
-			secret:         googleTestSecret, // secret always leads to success in V2
-			clientResponse: "anything",
 		},
 	}
 
@@ -54,34 +53,34 @@ func TestVerifyV3(t *testing.T) {
 		description    string
 		clientResponse string
 		secret         string
-		// key            string
-		options []OptionV3
-		err     error
+		options        []OptionV3
+		err            error
 	}{
 		{
-			description: "missing form",
+			description:    "happy",
+			secret:         testSecret, // secret always leads to score 0.0 in V3
+			clientResponse: "anything",
+			options:        []OptionV3{MinScore(0.0)},
+		},
+		{
+			description: "missing_form",
 			err:         ErrNoCaptcha,
 		},
 		{
-			description:    "missing secret",
+			description:    "missing_secret",
 			clientResponse: "wrong",
 			err:            ErrNoSuccess,
 		},
 		{
 			description:    "no_success",
-			secret:         googleTestSecret, // secret always leads score 0.0 in V3
+			secret:         testSecret,
 			clientResponse: "anything",
 			err:            ErrScore,
 		},
-		{
-			description:    "low_score",
-			secret:         googleTestSecret,
-			clientResponse: "anything",
-			options:        []OptionV3{MinScore(0.0)},
-		},
+
 		{
 			description:    "wrong_action",
-			secret:         googleTestSecret,
+			secret:         testSecret,
 			clientResponse: "anything",
 			options:        []OptionV3{MinScore(0.0), Action("register")},
 			err:            ErrAction,
