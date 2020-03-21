@@ -12,6 +12,17 @@ import (
 	"time"
 )
 
+var (
+	// ErrNoCaptcha is returned when the form value 'g-recaptcha-response' is empty
+	ErrNoCaptcha = errors.New("missing recaptcha response in request")
+	// ErrNoSuccess is returned when the recaptcha request was not successful.
+	ErrNoSuccess = errors.New("request was not successful")
+	// ErrScore is returned when the calculated score is below the required score (V3 only).
+	ErrScore = errors.New("request was below the required score")
+	// ErrAction is returned when the action is not the required one (V3 only).
+	ErrAction = errors.New("wrong action")
+)
+
 // ResponseV2 is a reCAPTCHA v2 response.
 type ResponseV2 struct {
 	Success     bool      `json:"success"`
@@ -32,7 +43,7 @@ func VerifyV2(secret string, r *http.Request) (*ResponseV2, error) {
 		return nil, err
 	}
 	if !resp.Success {
-		return &resp, ErrNoSuccess
+		return &resp, fmt.Errorf("%w: %v", ErrNoSuccess, resp.ErrorCodes)
 	}
 	return &resp, nil
 }
@@ -87,7 +98,7 @@ func VerifyV3(secret string, r *http.Request, opts ...OptionV3) (*ResponseV3, er
 		return nil, err
 	}
 	if !resp.Success {
-		return &resp, ErrNoSuccess
+		return &resp, fmt.Errorf("%w: %v", ErrNoSuccess, resp.ErrorCodes)
 	}
 	if resp.Score < o.minScore {
 		return &resp, fmt.Errorf("%w: %v/%v", ErrScore, resp.Score, o.minScore)
@@ -98,17 +109,6 @@ func VerifyV3(secret string, r *http.Request, opts ...OptionV3) (*ResponseV3, er
 
 	return &resp, nil
 }
-
-var (
-	// ErrNoCaptcha is returned when the form value 'g-recaptcha-response' is empty
-	ErrNoCaptcha = errors.New("missing recaptcha response in request")
-	// ErrNoSuccess is returned when the recaptcha request was not successful.
-	ErrNoSuccess = errors.New("request was not successful")
-	// ErrScore is returned when the calculated score is below the required score (V3 only).
-	ErrScore = errors.New("request was below the required score")
-	// ErrAction is returned when the action is not the required one (V3 only).
-	ErrAction = errors.New("wrong action")
-)
 
 func verify(secret string, r *http.Request) ([]byte, error) {
 	response := r.FormValue("g-recaptcha-response")
