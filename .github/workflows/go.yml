@@ -22,10 +22,11 @@ jobs:
       - name: Vet
         run: go vet ./...
 
-      - name: Lint
-        run: |
-          go get -u golang.org/x/lint/golint
-          golint ./...
+      # disable lint for now: https://github.com/sj14/recaptcha/runs/524376020
+      # - name: Lint
+      #   run: |
+      #     go get -u golang.org/x/lint/golint
+      #     golint ./...
 
       - name: Test
         run: go test -race ./...
