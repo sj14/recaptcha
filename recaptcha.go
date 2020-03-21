@@ -1,4 +1,4 @@
-// based on https://www.socketloop.com/tutorials/golang-recaptcha-example
+// Package recaptcha handles Google reCAPTCHA v2 and v3.
 package recaptcha
 
 import (
