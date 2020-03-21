@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	// ErrNoCaptcha is returned when the form value 'g-recaptcha' is empty
+	// ErrNoCaptcha is returned when the form value 'g-recaptcha-response' is empty
 	ErrNoCaptcha = errors.New("missing recaptcha response in request")
 	// ErrNoSuccess is returned when the recaptcha request was not successful.
 	ErrNoSuccess = errors.New("request was not successful")
@@ -111,7 +111,7 @@ func VerifyV3(secret string, r *http.Request, opts ...OptionV3) (*ResponseV3, er
 }
 
 func verify(secret string, r *http.Request) ([]byte, error) {
-	response := r.FormValue("g-recaptcha")
+	response := r.FormValue("g-recaptcha-response")
 	if response == "" {
 		return nil, ErrNoCaptcha
 	}
