@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-go get -u github.com/sj14/go-recaptcha
+go get -u github.com/sj14/recaptcha
 ```
 
 ## Usage
