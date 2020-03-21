@@ -43,6 +43,8 @@ if err != nil {
 
 ### reCAPTCHA V3
 
+See https://developers.google.com/recaptcha/docs/v3
+
 #### HTML
 
 ```html
