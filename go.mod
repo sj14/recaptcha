@@ -1,3 +1,3 @@
-module github.com/sj14/go-recaptcha
+module github.com/sj14/recaptcha
 
 go 1.14
