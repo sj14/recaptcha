@@ -100,10 +100,14 @@ func VerifyV3(secret string, r *http.Request, opts ...OptionV3) (*ResponseV3, er
 }
 
 var (
+	// ErrNoCaptcha is returned when the form value 'g-recaptcha-response' is empty
 	ErrNoCaptcha = errors.New("missing recaptcha response in request")
+	// ErrNoSuccess is returned when the recaptcha request was not successful.
 	ErrNoSuccess = errors.New("request was not successful")
-	ErrScore     = errors.New("request was below the required score")
-	ErrAction    = errors.New("wrong action")
+	// ErrScore is returned when the calculated score is below the required score (V3 only).
+	ErrScore = errors.New("request was below the required score")
+	// ErrAction is returned when the action is not the required one (V3 only).
+	ErrAction = errors.New("wrong action")
 )
 
 func verify(secret string, r *http.Request) ([]byte, error) {
