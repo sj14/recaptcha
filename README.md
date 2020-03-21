@@ -101,6 +101,4 @@ if err != nil {
 
 This package is based on the work of [Adam Ng](https://www.socketloop.com/tutorials/golang-recaptcha-example) and I highly support his appeal:
 
-```text
-IF you gain some knowledge or the information here solved your programming problem. Please consider donating to the less fortunate or some charities that you like. Apart from donation, planting trees, volunteering or reducing your carbon footprint will be great too.
-```
+> IF you gain some knowledge or the information here solved your programming problem. Please consider donating to the less fortunate or some charities that you like. Apart from donation, planting trees, volunteering or reducing your carbon footprint will be great too.
