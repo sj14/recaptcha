@@ -99,10 +99,8 @@ func TestVerifyV3(t *testing.T) {
 }
 
 func newRequest(t *testing.T, clientResponse string) *http.Request {
-	form := url.Values{}
-	form.Set("g-recaptcha-response", clientResponse)
-
-	req, err := http.NewRequest(http.MethodPost, "https://example.com", strings.NewReader(form.Encode()))
+	form := url.Values{"g-recaptcha-response": {clientResponse}}.Encode()
+	req, err := http.NewRequest(http.MethodPost, "https://example.com", strings.NewReader(form))
 	if err != nil {
 		t.Fatal(err)
 	}
