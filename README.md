@@ -2,6 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/sj14/recaptcha?status.png)](https://pkg.go.dev/github.com/sj14/recaptcha?tab=doc)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sj14/recaptcha)](https://goreportcard.com/report/github.com/sj14/recaptcha)
+![Action](https://github.com/sj14/recaptcha/workflows/Go/badge.svg)
 
 ## Installation
 
