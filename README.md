@@ -12,6 +12,27 @@ The result will always return an error when any kind of failure occured, thus on
 
 ### reCAPTCHA V2
 
+#### HTML
+
+See https://developers.google.com/recaptcha/docs/display#automatically_render_the_recaptcha_widget
+
+```html
+<html>
+  <head>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body>
+    <form action="?" method="POST">
+      <div class="g-recaptcha" data-sitekey="<YOUR_SITE_KEY>"></div>
+      <br/>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
+```
+
+#### Go
+
 ```go
 result, err := recaptcha.VerifyV2(recaptchaSecret, httpRequest)
 if err != nil {
@@ -21,6 +42,32 @@ if err != nil {
 ```
 
 ### reCAPTCHA V3
+
+#### HTML
+
+```html
+<html>
+  <head>
+    <script src="https://www.google.com/recaptcha/api.js?render=<YOUR_SITE_KEY>"></script>
+    <script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('<YOUR_SITE_KEY>', { action: 'register' }).then(function (token) {
+            var recaptchaResponse = document.getElementById('g-recaptcha-response');
+            recaptchaResponse.value = token;
+        });
+    });
+</script>
+</head>
+  <body>
+    <form method="POST" action="/register">
+        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+        <input type="submit" value="Submit">
+</form>
+</body>
+
+```
+
+#### Go
 
 Without options:
 
