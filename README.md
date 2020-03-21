@@ -15,9 +15,9 @@ The result will always return an error when any kind of failure occured, thus on
 
 ### reCAPTCHA v2
 
-#### HTML
+See [reCAPTCHA v2 docs](https://developers.google.com/recaptcha/docs/display)
 
-See https://developers.google.com/recaptcha/docs/display#automatically_render_the_recaptcha_widget
+#### HTML
 
 ```html
 <html>
@@ -46,7 +46,7 @@ if err != nil {
 
 ### reCAPTCHA v3
 
-See https://developers.google.com/recaptcha/docs/v3
+See [reCAPTCHA v3 docs](https://developers.google.com/recaptcha/docs/v3)
 
 #### HTML
 
