@@ -10,7 +10,7 @@ go get -u github.com/sj14/recaptcha
 
 The result will always return an error when any kind of failure occured, thus only checking the error is sufficient.
 
-### reCAPTCHA V2
+### reCAPTCHA v2
 
 #### HTML
 
@@ -41,7 +41,7 @@ if err != nil {
 // result is not necessary to check, only required for more details
 ```
 
-### reCAPTCHA V3
+### reCAPTCHA v3
 
 See https://developers.google.com/recaptcha/docs/v3
 
@@ -60,11 +60,11 @@ See https://developers.google.com/recaptcha/docs/v3
     });
 </script>
 </head>
-  <body>
+<body>
     <form method="POST" action="/register">
         <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
         <input type="submit" value="Submit">
-</form>
+    </form>
 </body>
 
 ```
